@@ -27,7 +27,22 @@ void seleccion(int n, int *arr)
 
 void inserccion(int n, int arr[])
 {
+    int pos,tmp,comp = 0, movi = 0;
+    for(int i = 0; i<n; i++)
+    {
+        pos = i;
+        tmp = arr[i];
+        comp++;
+        while((pos>0) && arr[pos-1] > tmp)
+        {
+            arr[pos] = arr[pos-1];
+            pos--;
+            movi++;
+        }
+        arr[pos] = tmp;
 
+        cout<<"\nComparaciones: "<<comp<<" Movimientos: "<<movi<<endl;
+    }
 }
 
 
@@ -35,7 +50,7 @@ main()
 {
     int arr[] = {18,12,64,3,6}, n = 5;
     n = sizeof(arr)/sizeof(arr[0]);
-    seleccion(n,arr);
+    inserccion(n,arr);
 
     for(int i = 0; i<n; i++)
     {
