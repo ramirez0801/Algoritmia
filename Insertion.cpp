@@ -5,6 +5,10 @@ using namespace std;
 void seleccion(int n, int *arr)
 {
     int mini,tmp, comp = 0, movi = 0;
+    fstream archI, archM, archC;
+    archI.open("Itera.txt",ios::out);
+    archM.open("Movi.txt", ios::out);
+    archC.open("Comp.txt",ios::out);
     for(int i = 0; i < n-1;i++)
     {
         mini = i;
@@ -21,14 +25,25 @@ void seleccion(int n, int *arr)
         arr[i] = arr[mini];
         arr[mini] = tmp;
 
-        cout<<"\nComparaciones: "<<comp<<" Movimientos: "<<movi<<endl;
+        //cout<<"\nComparaciones: "<<comp<<" Movimientos: "<<movi<<endl;
+        archI<<i<<"\n";
+        archM<<movi<<"\n";
+        archC<<comp<<"\n";
     }
+
+    archI.close();
+    archM.close();
+    archC.close();
 }
 
 void inserccion(int n, int arr[])
 {
-    int pos,tmp,comp = 0, movi = 0;
-    for(int i = 0; i<n; i++)
+    int pos,tmp,i,comp = 0, movi = 0;
+    fstream archI, archM, archC;
+    archI.open("Itera.txt",ios::out);
+    archM.open("Movi.txt", ios::out);
+    archC.open("Comp.txt",ios::out);
+    for(i = 0; i<n; i++)
     {
         pos = i;
         tmp = arr[i];
@@ -41,21 +56,32 @@ void inserccion(int n, int arr[])
         }
         arr[pos] = tmp;
 
-        cout<<"\nComparaciones: "<<comp<<" Movimientos: "<<movi<<endl;
+        //cout<<"\nComparaciones: "<<comp<<" Movimientos: "<<movi<<endl;
+
+        archI<<i<<"\n";
+        archM<<movi<<"\n";
+        archC<<comp<<"\n";
     }
+
+    archI.close();
+    archM.close();
+    archC.close();
+
 }
 
 
 main()
 {
-    int arr[] = {18,12,64,3,6}, n = 5;
+    int arr[] = {84,3,1,5,45,10,74,8,4,6}, n = 5;
     n = sizeof(arr)/sizeof(arr[0]);
-    inserccion(n,arr);
+    seleccion(n,arr);
 
     for(int i = 0; i<n; i++)
     {
         cout<<arr[i]<<" ";
     }
+
+   system("py ../graficas.py");
 
     return 0;
 
